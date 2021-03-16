@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using HQ_Task3.Model;
+using TG_Task3.Model;
 using Newtonsoft.Json;
 using System.Net.Mime;
 
-namespace HQ_Task3.Controllers
+namespace TG_Task3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,8 +19,8 @@ namespace HQ_Task3.Controllers
         /// <summary>
         /// Returns the filtered list of Hotel rates by HotelId and Arrival Date
         /// </summary>
-        /// <param name="HotelId">Hotel Id</param>
-        /// <param name="ArrivalDate">Arrival Date. Time part is not used</param>
+        /// <param name="HotelId">e.g. 7294</param>
+        /// <param name="ArrivalDate">e.g 2016-03-15. Time part is not used</param>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -35,7 +35,7 @@ namespace HQ_Task3.Controllers
             var hotelRates = System.IO.File.ReadAllText(hotelRatesjsonPath);
 
             // Deserialize to object for querying
-            var hotelJsonList = JsonConvert.DeserializeObject<List<HQHotelRate>>(hotelRates);
+            var hotelJsonList = JsonConvert.DeserializeObject<List<TGHotelRate>>(hotelRates);
 
             if (hotelJsonList != null && hotelJsonList.Any())
             {
@@ -48,7 +48,7 @@ namespace HQ_Task3.Controllers
 
                     if (filteredHotelRates != null && filteredHotelRates.Any())
                     {
-                        return Ok(new HQHotelRate
+                        return Ok(new TGHotelRate
                         {
                             Hotel = hotelById.Hotel,
                             HotelRates = filteredHotelRates

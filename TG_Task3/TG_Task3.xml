@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TG_Task3</name>
+    </assembly>
+    <members>
+        <member name="M:TG_Task3.Controllers.HotelRatesController.GetHotelRatesList(System.Int32,System.DateTime)">
+            <summary>
+            Returns the filtered list of Hotel rates by HotelId and Arrival Date
+            </summary>
+            <param name="HotelId">e.g. 7294</param>
+            <param name="ArrivalDate">e.g 2016-03-15. Time part is not used</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

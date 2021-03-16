@@ -4,9 +4,9 @@ using System.Linq;
 //using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace HQ_Task3.Model
+namespace TG_Task3.Model
 {
-    public class HQHotelRate
+    public class TGHotelRate
     {
         //[JsonPropertyName("hotel")]
         public Hotel Hotel { get; set; }

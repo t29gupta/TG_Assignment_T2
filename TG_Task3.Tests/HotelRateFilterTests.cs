@@ -1,11 +1,11 @@
-using HQ_Task3.Controllers;
-using HQ_Task3.Model;
+using TG_Task3.Controllers;
+using TG_Task3.Model;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using System;
 using System.Globalization;
 
-namespace HQ_Task3.Tests
+namespace TG_Task3.Tests
 {
     public class Tests
     {
@@ -62,13 +62,13 @@ namespace HQ_Task3.Tests
             var okResultObject = (okResult as OkObjectResult).Value;
 
             Assert.IsInstanceOf<OkObjectResult>(okResult);
-            Assert.IsInstanceOf<HQHotelRate>(okResultObject);
+            Assert.IsInstanceOf<TGHotelRate>(okResultObject);
 
-            HQHotelRate hqHotelRateResult = okResultObject as HQHotelRate;
+            TGHotelRate tgHotelRateResult = okResultObject as TGHotelRate;
 
             // Verifying the returned list contains valid results
-            Assert.AreEqual(mockCorrectHotelId, hqHotelRateResult.Hotel.HotelID);
-            Assert.That(hqHotelRateResult.HotelRates.TrueForAll(x => x.TargetDay.Date == mockCorrectArrivalDate));
+            Assert.AreEqual(mockCorrectHotelId, tgHotelRateResult.Hotel.HotelID);
+            Assert.That(tgHotelRateResult.HotelRates.TrueForAll(x => x.TargetDay.Date == mockCorrectArrivalDate));
         }
     }
 }

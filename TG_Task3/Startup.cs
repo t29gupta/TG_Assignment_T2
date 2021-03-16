@@ -15,7 +15,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace HQ_Task3
+namespace TG_Task3
 {
     public class Startup
     {
@@ -35,7 +35,7 @@ namespace HQ_Task3
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "HQ WebApi Task3",
+                    Title = "TG WebApi Task3",
                     Version = "v1",
                     Description = "Filter Hotel Rates list",
                     Contact = new OpenApiContact
@@ -70,7 +70,7 @@ namespace HQ_Task3
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HQ_Task3 v1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "TG_Task3 v1");
                     c.DisplayOperationId();
                 });
             }

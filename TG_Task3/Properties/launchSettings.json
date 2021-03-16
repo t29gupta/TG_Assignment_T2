@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "HQ_Task3": {
+    "TG_Task3": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
