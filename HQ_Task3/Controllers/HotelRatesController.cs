@@ -7,14 +7,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using HQ_Task3.Model;
 using Newtonsoft.Json;
+using System.Net.Mime;
 
 namespace HQ_Task3.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
     public class HotelRatesController : ControllerBase
     {
+        /// <summary>
+        /// Returns the filtered list of Hotel rates by HotelId and Arrival Date
+        /// </summary>
+        /// <param name="HotelId">Hotel Id</param>
+        /// <param name="ArrivalDate">Arrival Date. Time part is not used</param>
+        /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult GetHotelRatesList([FromQuery] int HotelId, [FromQuery] DateTime ArrivalDate)
         {
             // Import json
@@ -33,11 +43,16 @@ namespace HQ_Task3.Controllers
 
                 if (hotelById != null)
                 {
-                    var res = hotelById.HotelRates.Where(x => x.TargetDay.Date == ArrivalDate.Date).ToList();
+                    // Comparing only the date part of the DateTime Object 
+                    var filteredHotelRates = hotelById.HotelRates.Where(x => x.TargetDay.Date == ArrivalDate.Date).ToList();
 
-                    if (res != null && res.Any())
+                    if (filteredHotelRates != null && filteredHotelRates.Any())
                     {
-                        return Ok(res);
+                        return Ok(new HQHotelRate
+                        {
+                            Hotel = hotelById.Hotel,
+                            HotelRates = filteredHotelRates
+                        });
                     }
                     else
                     {

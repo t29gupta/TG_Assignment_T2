@@ -7,9 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HQ_Task3
@@ -30,7 +33,31 @@ namespace HQ_Task3
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HQ_Task3", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "HQ WebApi Task3",
+                    Version = "v1",
+                    Description = "Filter Hotel Rates list",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Tushar Gupta",
+                        Email = "test@tgupta.com"
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "MIT License"
+                    }
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
+
+                c.CustomOperationIds(apiDescription =>
+                {
+                    return apiDescription.TryGetMethodInfo(out MethodInfo methodInfo) ? methodInfo?.Name : null;
+                });
             });
         }
 
@@ -41,7 +68,11 @@ namespace HQ_Task3
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HQ_Task3 v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HQ_Task3 v1");
+                    c.DisplayOperationId();
+                });
             }
 
             app.UseHttpsRedirection();
