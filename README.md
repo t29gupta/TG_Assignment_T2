@@ -19,4 +19,4 @@
 2. Run all tests
 
 ## My Approach:
-I'm first filtering the list by hotelId and then By ArrivalDate. By doing this I'm able to return a moer accurate result that in case of Not Found.
+I'm first filtering the list by hotelId and then By ArrivalDate. By doing this I'm able to return a more accurate result in case of "Not Found".
